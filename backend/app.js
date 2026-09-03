@@ -14,7 +14,16 @@ const authRoutes = require('./routes/authRoutes');
 const app = express();
 
 app.use(helmet());
-const allowedOrigins = (process.env.CORS_ORIGINS || 'http://localhost:5173')
+// Fallback list is used only when CORS_ORIGINS isn't set on the host
+// (e.g. Render). Set CORS_ORIGINS explicitly in production — this default
+// is just a safety net so a missing env var doesn't silently break the
+// deployed frontend.
+const DEFAULT_ALLOWED_ORIGINS = [
+  'http://localhost:5173',
+  'https://notice2-action-omega.vercel.app',
+];
+
+const allowedOrigins = (process.env.CORS_ORIGINS || DEFAULT_ALLOWED_ORIGINS.join(','))
   .split(',')
   .map((o) => o.trim())
   .filter(Boolean);
