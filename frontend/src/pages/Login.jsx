@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header.jsx';
-
-const baseURL = import.meta.env.VITE_API_URL || '/api';
+import { API_BASE_URL as baseURL } from '../services/apiBaseUrl.js';
 
 export default function Login() {
   const navigate = useNavigate();
