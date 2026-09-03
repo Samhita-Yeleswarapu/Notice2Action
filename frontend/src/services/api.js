@@ -1,13 +1,12 @@
 import axios from 'axios';
+import { API_BASE_URL } from './apiBaseUrl.js';
 
 // VITE_API_URL is the only Anthropic/backend-related setting the frontend
 // knows about, and it's just a URL — never a secret. The Anthropic API key
 // lives only on the server (see backend/services/aiService.js) and this
 // file never references it.
-const baseURL = import.meta.env.VITE_API_URL || '/api';
-
 const client = axios.create({
-  baseURL,
+  baseURL: API_BASE_URL,
   timeout: 60000,
 });
 
